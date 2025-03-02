@@ -13,6 +13,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
     //@Query(value = "SELECT * FROM Movies WHERE id = :id", nativeQuery = true)
     //Optional<Movie> findMovieById(Longe id);
 
-    @Query(value = "SELECT * FROM Movies_tb WHERE name = :name", nativeQuery = true)
+    @Query(value = "SELECT * FROM movies_tb WHERE name = :name", nativeQuery = true)
     Optional<Movie> findMovieByName(String name);
 }

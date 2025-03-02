@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-@Table(name = "Movies_tb")
+@Table(name = "movies_tb")
 public class Movie implements Serializable{
     private static final long serialVersionUID = 1L;
 

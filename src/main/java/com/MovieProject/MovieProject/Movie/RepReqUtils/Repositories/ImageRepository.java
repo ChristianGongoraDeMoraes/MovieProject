@@ -13,10 +13,10 @@ import com.MovieProject.MovieProject.Movie.Image;
 public interface ImageRepository extends JpaRepository<Image, Long> {
 	Optional<Image> findByName(String name);
 
-	@Query(value="Select * From Movies_images where movie_id = :id", nativeQuery = true)
+	@Query(value="SELECT * FROM movies_images WHERE movie_id = :id", nativeQuery = true)
 	Optional<Image> findByMovieId(Long id);
 
 	@Modifying
-	@Query(value="Delete From Movies_images where movie_id = :id", nativeQuery = true)
+	@Query(value="DELETE FROM movies_images WHERE movie_id = :id", nativeQuery = true)
 	Optional<Image> deleteByMovieId(Long id);
 }

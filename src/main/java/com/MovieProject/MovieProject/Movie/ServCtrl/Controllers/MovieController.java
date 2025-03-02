@@ -49,6 +49,6 @@ public class MovieController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body(movieService.deleteMovie(id));
+        return ResponseEntity.status(HttpStatus.OK).body(movieService.deleteMovieById(id));
     }
 }

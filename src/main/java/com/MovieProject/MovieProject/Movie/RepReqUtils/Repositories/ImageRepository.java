@@ -18,5 +18,5 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
 	@Modifying
 	@Query(value="DELETE FROM movies_images WHERE movie_id = :id", nativeQuery = true)
-	Optional<Image> deleteByMovieId(Long id);
+	void deleteByMovieId(Long id);
 }

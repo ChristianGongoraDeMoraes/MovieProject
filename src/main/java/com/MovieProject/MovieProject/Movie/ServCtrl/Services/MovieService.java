@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.MovieProject.MovieProject.Movie.Movie;
+import com.MovieProject.MovieProject.Movie.RepReqUtils.Repositories.ImageRepository;
 import com.MovieProject.MovieProject.Movie.RepReqUtils.Repositories.MovieRepository;
 import com.MovieProject.MovieProject.Movie.RepReqUtils.Requests.MovieSaveRequest;
 
@@ -16,6 +17,9 @@ import jakarta.transaction.Transactional;
 public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired 
+    ImageRepository imageRepository;
 
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
@@ -38,9 +42,10 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public String deleteMovie(Long id) throws Exception{
+    public String deleteMovieById(Long id) throws Exception{
         if(movieRepository.existsById(id)){
-            movieRepository.deleteById(id);
+            imageRepository.deleteByMovieId(id);
+            movieRepository.deleteMovieById(id);
             return "Movie Deleted";
         }else{
             throw new Exception("Movie Not found!");

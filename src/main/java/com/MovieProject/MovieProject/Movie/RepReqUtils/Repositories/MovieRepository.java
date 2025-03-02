@@ -20,5 +20,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
     @Query(value = "SELECT * FROM movies_tb WHERE name ILIKE concat('%', concat(:name, '%'))", nativeQuery = true)
     Optional<List<Movie>> findMoviesByNameLike(String name);
 
+    @Modifying
+    @Query(value = "DELETE FROM movies_tb WHERE id = :id", nativeQuery = true)
+    void deleteMovieById(Long id);
+
 
 }

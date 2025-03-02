@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: MovieProject
+    
+    datasource:
+        url: jdbc:postgresql://localhost:5432/MovieProject
+        username: postgres
+        password: 4
+    
+    jpa:
+        hibernate:
+            ddl-auto: update
+
+        show-sql: true

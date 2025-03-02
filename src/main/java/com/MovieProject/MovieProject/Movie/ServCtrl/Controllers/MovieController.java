@@ -37,6 +37,10 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.OK).body(movieService.getMovieById(id));
     }
     
+    @GetMapping("/searchLike/{name}")
+    public ResponseEntity<List<Movie>> getMoviesByNameLike(@PathVariable String name) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body(movieService.getMovieByNameLike(name));
+    }
 
     @PostMapping
     public ResponseEntity<Movie> makeNewOrder(@RequestBody MovieSaveRequest movieReq){

@@ -25,6 +25,10 @@ public class MovieService {
         return movieRepository.findById(id).orElseThrow(() -> new Exception("Movie Not found!"));
     }
 
+    public List<Movie> getMovieByNameLike(String name) throws Exception{
+        return movieRepository.findMoviesByNameLike(name).orElseThrow(() -> new Exception("Movie Not found!"));
+    }
+
     public Movie newMovie(MovieSaveRequest movieReq){
        Movie movie = Movie.builder()
             .name(movieReq.name())

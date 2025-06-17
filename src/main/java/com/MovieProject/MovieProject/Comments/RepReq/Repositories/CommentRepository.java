@@ -10,6 +10,6 @@ import com.MovieProject.MovieProject.Comments.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long>{
     
-    @Query(value="SELECT * FROM comments_tb WHERE movie_id = :id", nativeQuery= true)
+    @Query(value="SELECT * FROM comments_tb WHERE movie_id = :id order by id desc", nativeQuery= true)
     List<Comment> getAllCommentsByMovieId(Long id);
 }

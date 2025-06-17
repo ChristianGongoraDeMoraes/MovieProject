@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.text.View;
+
 import com.MovieProject.MovieProject.Comments.Comment;
+import com.MovieProject.MovieProject.Views.Views;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
@@ -48,5 +51,10 @@ public class Movie implements Serializable{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "movieComment", cascade = CascadeType.ALL)
     private final Set<Comment> comment = new HashSet<>();
+
+    
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "movieViews", cascade = CascadeType.ALL)
+    private final Set<Views> views = new HashSet<>();
 
 }

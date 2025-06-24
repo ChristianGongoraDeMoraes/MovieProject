@@ -3,6 +3,7 @@ package com.MovieProject.MovieProject.Movie.ServCtrl.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,8 +29,11 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public ResponseEntity<List<Movie>> getAllMovies(){
-        return ResponseEntity.status(HttpStatus.OK).body(movieService.getAllMovies());
+    public ResponseEntity<List<Movie>> getAllMovies(
+        @RequestParam(value="pageNo",defaultValue = "0", required = false ) int pageNo , 
+        @RequestParam(value="pageSize",defaultValue = "24", required = false ) int pageSize
+        ){
+        return ResponseEntity.status(HttpStatus.OK).body(movieService.getAllMovies(pageNo, pageSize));
     }
 
     @GetMapping("/{id}")
@@ -38,8 +42,11 @@ public class MovieController {
     }
     
     @GetMapping("/searchLike/{name}")
-    public ResponseEntity<List<Movie>> getMoviesByNameLike(@PathVariable String name) throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body(movieService.getMovieByNameLike(name));
+    public ResponseEntity<List<Movie>> getMoviesByNameLike(
+        @PathVariable String name,
+        @RequestParam(value="pageNo",defaultValue = "0", required = false ) int pageNo , 
+        @RequestParam(value="pageSize",defaultValue = "24", required = false ) int pageSize) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK).body(movieService.getMovieByNameLike(name, pageNo, pageSize));
     }
 
     @PostMapping

@@ -1,8 +1,11 @@
 package com.MovieProject.MovieProject.Movie.ServCtrl.Services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.MovieProject.MovieProject.Movie.Movie;
@@ -21,16 +24,23 @@ public class MovieService {
     @Autowired 
     ImageRepository imageRepository;
 
-    public List<Movie> getAllMovies(){
-        return movieRepository.findAll();
+    public List<Movie> getAllMovies(int pageNo, int pageSize){
+        PageRequest pageable = PageRequest.of(pageNo, pageSize);
+
+        Page<Movie> movies =  movieRepository.findAll(pageable); 
+
+        return movies.stream().map(p -> {
+            return new Movie(p.getId(), p.getName(), p.getRate(), p.getDescription());
+        }).collect(Collectors.toList());
     }
 
     public Movie getMovieById(Long id) throws Exception{
         return movieRepository.findById(id).orElseThrow(() -> new Exception("Movie Not found!"));
     }
 
-    public List<Movie> getMovieByNameLike(String name) throws Exception{
-        return movieRepository.findMoviesByNameLike(name).orElseThrow(() -> new Exception("Movie Not found!"));
+    public List<Movie> getMovieByNameLike(String name, int pageNo, int pageSize) throws Exception{
+        int offSet = pageNo * pageSize;
+        return movieRepository.findMoviesByNameLike(name, offSet, pageSize).orElseThrow(() -> new Exception("Movie Not found!"));
     }
 
     public Movie newMovie(MovieSaveRequest movieReq){
